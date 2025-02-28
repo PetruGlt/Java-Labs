@@ -15,7 +15,7 @@ public class Main {
     }
     public static void main(String[] args) {
         System.out.println("Hello world!");
-        String languages[] = {"C","C++","C#","Python","Go","Rust","JavaScript", "PHP", "Swift","Java"};
+        String[] languages = {"C","C++","C#","Python","Go","Rust","JavaScript", "PHP", "Swift","Java"};
 
         int n = (int) (Math.random() * 1_000_000);
         n = n*3;
