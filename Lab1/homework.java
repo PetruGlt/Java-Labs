@@ -1,8 +1,8 @@
 import java.util.*;
 
-public class Graph {
+public class Homework {
 
-    public static int[][] generateGraph(int n, int k) {
+    public static int[][] generateGraph(int n) {
         int[][] matrix = new int[n][n];
         for(int i=0;i<n;i++) {
             for(int j=i+1;j<n;j++) {
@@ -185,7 +185,7 @@ public class Graph {
 
         long startTime = System.nanoTime();
         //2.
-        int[][] matrix= generateGraph(n, k);
+        int[][] matrix= generateGraph(n);
 
         generateClique(matrix, n, k, clique);
         generateStableSet(matrix,n,k,clique,stableSet);
