@@ -122,7 +122,7 @@ public class Graph {
         // partea de sus
         System.out.print("   ");
         for (int i = 0; i < n; i++) {
-            System.out.printf("  %d ", i);
+            System.out.printf("  %2d", i);
         }
         System.out.println();
 
@@ -145,7 +145,7 @@ public class Graph {
             }
             System.out.println();
 
-            //partea de jos
+
             if (i < n - 1) {
                 System.out.print("   \u251C");
                 for (int j = 0; j < n - 1; j++) {
@@ -155,7 +155,6 @@ public class Graph {
             }
         }
 
-        // Print bottom border
         System.out.print("   \u2514");
         for (int i = 0; i < n - 1; i++) {
             System.out.print("\u2500\u2500\u2500\u2534");
@@ -184,6 +183,7 @@ public class Graph {
             return;
         }
 
+        long startTime = System.nanoTime();
         //2.
         int[][] matrix= generateGraph(n, k);
 
@@ -191,8 +191,9 @@ public class Graph {
         generateStableSet(matrix,n,k,clique,stableSet);
 
         //3.
-        printMatrix(matrix, n);
-
+        if(n<30) {
+            printMatrix(matrix, n);
+        }
         //4.
         System.out.println("Number of edges: " + numberOfEdges(matrix,n));
 
@@ -220,7 +221,51 @@ public class Graph {
             System.out.println("True: sum(degreeVertices) = 2*m");
         }
 //        System.out.println(numberOfEdges(matrix, n));
-
+        long endTime = System.nanoTime();
+        long duration = (endTime - startTime)/1_000_000;
+        System.out.println("Execution time: " + duration+"ms");
     }
-
 }
+/*
+    petru10@PetruGlt-MRC-WX0:~/IdeaProjects/Java-Labs/Lab1$ java -Xms4G -Xmx4G homework.java 30023 23
+    Clique vertices: [14114, 22408, 5732, 23328, 15377, 24624, 18936, 10760, 99, 1566, 11660, 24287, 6263, 14691, 26254, 27316, 9011, 12856, 25188, 11243, 20224, 11627, 20617]
+    Stable Set: [22153, 28862, 22176, 3465, 12370, 8538, 20702, 10015, 7670, 28385, 17136, 10588, 11540, 12810, 29304, 24243, 6966, 10433, 10197, 3653, 3941, 315, 19473]
+    Number of edges: 224976511
+    Δ(G): 15319
+    δ(G): 22
+    True: sum(degreeVertices) = 2*m
+    Execution time: 51898ms
+*/
+
+    /*
+petru10@PetruGlt-MRC-WX0:~/IdeaProjects/Java-Labs/Lab1$ java -Xms4G -Xmx4G homework.java 10 4
+Clique vertices: [1, 8, 2, 7]
+Stable Set: [9, 6, 5, 0]
+      0   1   2   3   4   5   6   7   8   9
+   ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
+ 0 │ △ │ △ │ △ │ ▲ │ △ │ △ │ △ │ △ │ △ │ △ │
+   ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
+ 1 │ △ │ △ │ ▲ │ △ │ △ │ △ │ △ │ ▲ │ ▲ │ △ │
+   ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
+ 2 │ △ │ ▲ │ △ │ △ │ △ │ △ │ △ │ ▲ │ ▲ │ △ │
+   ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
+ 3 │ ▲ │ △ │ △ │ △ │ ▲ │ ▲ │ ▲ │ △ │ △ │ ▲ │
+   ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
+ 4 │ △ │ △ │ △ │ ▲ │ △ │ △ │ △ │ △ │ △ │ ▲ │
+   ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
+ 5 │ △ │ △ │ △ │ ▲ │ △ │ △ │ △ │ △ │ △ │ △ │
+   ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
+ 6 │ △ │ △ │ △ │ ▲ │ △ │ △ │ △ │ △ │ △ │ △ │
+   ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
+ 7 │ △ │ ▲ │ ▲ │ △ │ △ │ △ │ △ │ △ │ ▲ │ △ │
+   ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
+ 8 │ △ │ ▲ │ ▲ │ △ │ △ │ △ │ △ │ ▲ │ △ │ △ │
+   ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
+ 9 │ △ │ △ │ △ │ ▲ │ ▲ │ △ │ △ │ △ │ △ │ △ │
+   └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘
+Number of edges: 12
+Δ(G): 5
+δ(G): 1
+True: sum(degreeVertices) = 2*m
+Execution time: 32ms
+*/
