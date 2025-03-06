@@ -76,7 +76,7 @@ public class Bonus {
 
         for(int i=start; i<matrix.length; i++){
             if(canAdd(matrix,i,currentStateOfClique)) {
-                currentStateOfClique.add(1);
+                currentStateOfClique.add(i);
 //                System.out.println(currentStateOfClique);
                 if(findClique(matrix,k,i+1,currentStateOfClique)){
                     return true;
