@@ -1,31 +1,38 @@
-import java.util.List;
+import java.time.LocalDate;
 
-public class Student{
-    private String studentId;
-    private List<Project> projects;
+public class Student extends Person {
+    private String registrationNumber;
+    private Project[] preferences;
+    private Project assignedProject;
 
-    public Student(String studentId, List<Project> projects) {
-        this.studentId = studentId;
-        this.projects = projects;
+
+
+    public Student(String name, LocalDate date, String registrationNumber, Project ... projects) {
+        super(name, date);
+        this.registrationNumber = registrationNumber;
+        this.preferences = projects;
     }
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
+    public void setRegistrationNumber(String registrationNumber) {
+        this.registrationNumber = registrationNumber;
     }
-    public String getStudentId() {
-        return studentId;
+    public String getRegistrationNumber() {
+        return registrationNumber;
     }
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
+    public void setPreferences(Project ... projects) {
+        this.preferences = projects;
     }
-    public List<Project> getProjects() {
-        return projects;
+    public Project[] getPreferences() {
+        return preferences;
+    }
+    public void assignProject(Project project) {
+        assignedProject = project;
     }
 
-    @java.lang.Override
-    public java.lang.String toString() {
-        return "Student{" +
-                "studentId='" + studentId + '\'' +
-                ", projects=" + projects +
+    @Override
+    public String toString() {
+        return "Student{" + getName() + ", " + getBirthDate() + ", " +
+                "registrationNumber='" + registrationNumber + '\'' +
+                ", acceptable projects=" + preferences +
                 '}';
     }
 }
