@@ -1,15 +1,14 @@
 import java.util.Objects;
 
 public class Project {
-    private String title;
-    private projectType type;
-    private boolean assigned = false;
-    private Student student;
+    private final String title;
+    private final projectType type;
+    private boolean hasTeacher;
     private int popularity;
 
     public enum projectType{
         PRACTICAL,
-        THEORETICAL;
+        THEORETICAL
     }
 
     public Project(String title, projectType type) {
@@ -25,14 +24,6 @@ public class Project {
         return type;
     }
 
-    public boolean isAssigned() {
-        return assigned;
-    }
-
-    public void Assign() {
-        assigned = true;
-    }
-
     public void increasePopularity() {
         popularity++;
     }
@@ -40,6 +31,12 @@ public class Project {
     public int getPopularity() {
         return popularity;
     }
+
+    public void setTeacher(Project project) {
+        project.hasTeacher = true;
+    }
+
+
 
     @Override
     public String toString() {

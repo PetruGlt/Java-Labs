@@ -1,9 +1,8 @@
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Objects;
+import java.util.*;
 
 public class Student extends Person {
-    private String registrationID;
+    private final String registrationID;
     private Project[] desiredProjects;
     private Project ownProject;
 
@@ -12,6 +11,7 @@ public class Student extends Person {
         this.dateOfBirth = dob;
         this.registrationID = registrationID;
     }
+
     public String getRegistrationID() {
         return registrationID;
     }
@@ -34,8 +34,7 @@ public class Student extends Person {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Student)) return false;
-        Student student = (Student) o;
+        if (!(o instanceof Student student)) return false;
         return Objects.equals(registrationID, student.registrationID);
     }
 
