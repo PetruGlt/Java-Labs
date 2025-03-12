@@ -1,31 +1,56 @@
-import java.util.List;
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Objects;
 
-public class Student{
-    private String studentId;
-    private List<Project> projects;
+public class Student extends Person {
+    private String registrationID;
+    private Project[] desiredProjects;
+    private Project ownProject;
 
-    public Student(String studentId, List<Project> projects) {
-        this.studentId = studentId;
-        this.projects = projects;
+    public Student(String name, LocalDate dob, String registrationID) {
+        this.name = name;
+        this.dateOfBirth = dob;
+        this.registrationID = registrationID;
     }
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
-    }
-    public String getStudentId() {
-        return studentId;
-    }
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
-    }
-    public List<Project> getProjects() {
-        return projects;
+    public String getRegistrationID() {
+        return registrationID;
     }
 
-    @java.lang.Override
-    public java.lang.String toString() {
+    public void setPreferences(Project ... projects){
+        desiredProjects = projects;
+    }
+
+    public Project[] getPreferences(){
+        return desiredProjects;
+    }
+
+    public void setProject(Project project){
+        ownProject = project;
+    }
+
+    public Project getProject(){
+        return ownProject;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Student)) return false;
+        Student student = (Student) o;
+        return Objects.equals(registrationID, student.registrationID);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(registrationID);
+    }
+
+    @Override
+    public String toString() {
         return "Student{" +
-                "studentId='" + studentId + '\'' +
-                ", projects=" + projects +
+                "name='" + name + '\'' +
+                ", registrationID='" + registrationID + '\'' +
+                ", desiredProjects=" + Arrays.toString(desiredProjects) +
+                ", ownProject=" + ownProject +
                 '}';
     }
 }
