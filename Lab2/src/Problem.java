@@ -1,19 +1,18 @@
 /**
  * Clasa 'Problem' gestioneaza asignarea proiectelor studentilor si calculeaza cat de dorite sunt proiectele.
  * Aceasta clasa utilizeaza array-uri de studenti si profesori pentru a gestiona proiectele si preferintele studentilor
- *
- * */
+ */
 
 public class Problem {
 
     /**
      * Array-ul de studenti care participa la asignarea proiectelor
      * */
-    private Student[] students;
+    private final Student[] students;
     /**
      * Array-ul de profesori care au proiectele propuse
      * */
-    private Teacher[] teachers;
+    private final Teacher[] teachers;
 
     /**
      * Constructor pentru crearea unei instante a clasei 'Problem'
@@ -27,92 +26,33 @@ public class Problem {
     }
 
     /**
-     * Calculeaza popularitatea fiecarui proiect bazandu-se pe preferintele studentilor.
-     * Popularitatea unui proiect creste de fiecare data cand un student il prefera.
-     * */
-    public void computePopularity(){
-        for(Teacher t : teachers){
-            if(t!=null){
-                for(Project p: t.getProjects()){
-                    for(Student s: students) {
-                        if (s != null) {
-                            for (Project pref : s.getPreferences()) {
-                                if (pref == p) {
-                                    p.increasePopularity();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+     * Metoda principala care rezolva problema de asignare a proiectelor.
+     * Aceasta initializeaza o solutie, calculeaza popularitatea proiectelor
+     * si efectueaza asignarea propriu-zisa a proiectelor catre studenti.
+     */
+    public void solveTheProblem() {
+        Solution sol = new Solution(this);
+        sol.computePopularity(this);
+        sol.assignProjects(this);
     }
 
     /**
-     * Asigneaza proiecte studentilor, prioritatea fiind data de cel mai nepopular proiect.
-     * Dupa asignare, proiectul este eliminat din lista de proiecte disponibile.
-     * */
-    public void assignProjects(){
-        for (Teacher teacher : teachers) {
-            if(teacher!=null){
-                for(Project p : teacher.getProjects()){
-                    for(Student s : students){
-                        if(s!=null){
-                            for(Project pref : s.getPreferences()){
-                                if(pref == getMinPopularity()){
-                                    s.setProject(pref);
-                                    deleteProject(pref);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    /**
-     * Elimina un proiect din lista de proiecte disponibile pentru toti studentii
+     * Returneaza lista de studenti implicati in procesul de asignare.
      *
-     * @param project Proiectul ce se va elimina.
-     * */
-    public void deleteProject(Project project){
-        for(Teacher teacher : teachers) {
-            if (teacher != null) {
-                Project[] minusProject = new Project[10];
-                int size = 0;
-                for (Project p : teacher.getProjects()) {
-                    if (p!=null && !(p.equals(project))) {
-                        minusProject[size] = p;
-                        size++;
-                    }
-                }
-                teacher.setProjects(minusProject);
-            }
-        }
+     * @return Un array de obiecte de tip Student.
+     */
+    public Student[] getStudents() {
+        return students;
     }
 
     /**
-     * Returneaza proiectul cu cea mai mica popularitate.
+     * Returneaza lista de studenti implicati in procesul de asignare.
      *
-     * @return Proiectul cel mai putin popular sau null daca nu mai exista proiecte.
-     * */
-    public Project getMinPopularity(){
-        int min=10;
-        Project result = null;
-        for (Teacher teacher : teachers) {
-            if (teacher != null){
-                for (Project p : teacher.getProjects()) {
-                    if(p != null){
-                        if(min > p.getPopularity()){
-                            min = p.getPopularity();
-                            result = p;
-                        }
-                    }
-                }
-            }
-        }
-        return result;
+     * @return Un array de obiecte de tip Student.
+     */
+    public Teacher[] getTeachers() {
+        return teachers;
     }
+
 
 }

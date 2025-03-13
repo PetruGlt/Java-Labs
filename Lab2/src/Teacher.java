@@ -17,11 +17,11 @@ public class Teacher extends Person{
      * @param name Numele profesorului
      * */
     public Teacher(String name) {
-        this.name = name;
+        super(name);
     }
 
     /**
-     * getter pentru numele profesorului
+     * Getter pentru numele profesorului
      *
      * @return Numele profesorului
      * */

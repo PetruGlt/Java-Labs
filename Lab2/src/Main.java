@@ -99,7 +99,8 @@ public class Main {
         System.out.println("\n==========");
         System.out.println("Solution:\n");
         Problem p = new Problem(students,teachers);
-        p.computePopularity();
+        p.solveTheProblem();
+//        p.computePopularity();
 
         // Afisarea proiectelor dupa calcularea popularitatii
         System.out.println("\nProject: \n");
@@ -109,7 +110,7 @@ public class Main {
         }
         // Atribuirea proiectelor
         System.out.println("\n Assignment: \n");
-        p.assignProjects();
+//        p.assignProjects();
 
         // Afisarea studentilor dupa atribuirea proiectelor
         System.out.println("\nStudents: \n");
