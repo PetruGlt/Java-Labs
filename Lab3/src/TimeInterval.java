@@ -6,7 +6,4 @@ public class TimeInterval extends Pair<LocalTime, LocalTime> {
         super(first, second);
     }
 
-    public boolean overlaps(TimeInterval other) {
-        return getFirst().isBefore(other.getSecond()) && getFirst().isAfter(other.getSecond());
-    }
 }

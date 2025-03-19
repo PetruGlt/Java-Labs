@@ -4,6 +4,9 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args){
+        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=- Compulsory -=-=-=-=-=-=-=-=-=-=-=-=-\n");
+        Main.compulsory();
+        System.out.println("\n-=-=-=-=-=-=-=-=-=-=-=-=- Homework -=-=-=-=-=-=-=-=-=-=-=-=-\n");
         Main.homework();
 
     }
@@ -47,12 +50,17 @@ public class Main {
         flights.add(new Flight("FL005", new TimeInterval(LocalTime.of(11,0), LocalTime.of(11, 40))));
         flights.add(new Flight("FL011", new TimeInterval(LocalTime.of(10,30), LocalTime.of(11, 10))));
 
-        System.out.println("Flights:");
+        System.out.println("Flights: \n");
         for(Flight f : flights){
             System.out.println(f);
         }
 
+        System.out.println(" \nSolution: \n");
+
         Schedule problem = new Schedule(airport, flights);
+        problem.assignFlightsGreedy();
+        System.out.println(problem);
+
 
 
 

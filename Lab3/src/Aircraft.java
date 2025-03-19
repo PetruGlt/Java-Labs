@@ -2,6 +2,7 @@ abstract class Aircraft implements Comparable<Aircraft>{
     protected String name;
     protected String model;
     protected String tailNumber;
+    protected Flight flight;
 
     public Aircraft(String name, String model, String tailNumber) {
         this.name = name;
@@ -9,6 +10,13 @@ abstract class Aircraft implements Comparable<Aircraft>{
         this.tailNumber = tailNumber;
     }
 
+    public void setFlight(Flight flight) {
+        this.flight = flight;
+    }
+
+    public Flight getFlight() {
+        return flight;
+    }
     public String getName() {
         return name;
     }

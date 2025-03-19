@@ -1,6 +1,6 @@
 public class Flight {
-    private String identificationNumber;
-    private TimeInterval landingTimeInterval;
+    private final String identificationNumber;
+    private final TimeInterval landingTimeInterval;
 
     public Flight(String identificationNumber, TimeInterval landingTimeInterval) {
         this.identificationNumber = identificationNumber;

@@ -1,7 +1,5 @@
-import java.util.*;
-
 public class Airport {
-    private String name;
+    private final String name;
     private int runways;
 
     public Airport(String name, int runways) {
@@ -13,15 +11,11 @@ public class Airport {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getRunways() {
         return runways;
     }
 
-    public void setRunways(int runways) {
+    public void updateRunways(int runways) {
         this.runways = runways;
     }
 
