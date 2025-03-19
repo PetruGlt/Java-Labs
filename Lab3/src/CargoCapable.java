@@ -1,4 +1,4 @@
 public interface CargoCapable {
-    int getMaxPayload();
+    double getMaxPayload();
 
 }
