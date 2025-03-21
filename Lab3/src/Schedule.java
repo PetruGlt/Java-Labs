@@ -15,7 +15,7 @@ public class Schedule {
         this.flightRunwayMap = new HashMap<>();
     }
 
-    public void assignFlightsGreedy() {
+    public void assignFlightsOnRunways() {
         List<Flight> sortedFlights = new ArrayList<>(this.flights);
         sortedFlights.sort(Comparator.comparing(flight -> flight.getLandingTimeInterval().getFirst()));
 

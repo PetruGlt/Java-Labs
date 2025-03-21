@@ -35,13 +35,13 @@ public class Main {
         Airport airport = new Airport("Henri Coanda Bucharest (OTP)", 5);
 
         List<Aircraft> aircrafts = new ArrayList<>();
-        aircrafts.add(new Airliner("Boeing Travel", "Public","IS123",200,1050));
-        aircrafts.add(new Airliner("Boeing 700", "Public","IS123",200,1050));
-        aircrafts.add(new Freighter("Cargo","plane", "B123",5000));
+        aircrafts.add(new Airliner("Boeing Travel", "Public","IS153",200,1050));
+        aircrafts.add(new Airliner("Boeing 700", "Public","IS2523",200,1050));
+        aircrafts.add(new Freighter("Cargo","plane", "B133",5000));
         aircrafts.add(new Freighter("Cargo2","plane", "B123",5000));
-        aircrafts.add(new Freighter("Cargo3","plane", "B123",5000));
-        aircrafts.add(new Drone("DJI Drone Originals","plane", "B123",48));
-        aircrafts.add(new Drone("DJI Drone Phantom","plane", "B123",48));
+        aircrafts.add(new Freighter("Cargo3","plane", "B923",5000));
+        aircrafts.add(new Drone("DJI Drone Originals","drone", "B1209",48));
+        aircrafts.add(new Drone("DJI Drone Phantom","drone", "B1343",48));
 
         HashSet<Flight> flights = new HashSet<>();
         flights.add(new Flight("FL001", new TimeInterval(LocalTime.of(10,30), LocalTime.of(11, 10))));
@@ -58,12 +58,8 @@ public class Main {
         System.out.println(" \nSolution: \n");
 
         Schedule problem = new Schedule(airport, flights);
-        problem.assignFlightsGreedy();
+        problem.assignFlightsOnRunways();
         System.out.println(problem);
-
-
-
-
 
     }
 }
