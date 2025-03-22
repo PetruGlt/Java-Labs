@@ -1,5 +1,10 @@
 package org.example;
 
+
+import com.github.javafaker.Faker;
+import org.graph4j.Graph;
+import org.graph4j.GraphBuilder;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -8,9 +13,10 @@ import java.util.stream.IntStream;
 public class Main {
 
     public static void main(String[] args) {
+        Faker faker = new Faker();
 
         var locations = IntStream.rangeClosed(0, 4)
-                .mapToObj(i -> new Location("P" + i, Math.random()<0.5 ? Location.Type.FRIENDLY : Math.random()<0.5 ? Location.Type.NEUTRAL : Location.Type.ENEMY ) )
+                .mapToObj(i -> new Location(faker.address().streetAddress(), Math.random()<0.5 ? Location.Type.FRIENDLY : Math.random()<0.5 ? Location.Type.NEUTRAL : Location.Type.ENEMY ) )
                 .toArray(Location[]::new);
 
         for(Location location : locations) {
