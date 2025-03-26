@@ -1,26 +1,19 @@
 package org.example;
 
 public class Location implements Comparable<Location> {
-    enum Type {
-        FRIENDLY,
-        NEUTRAL,
-        ENEMY
-    }
+    private final String name;
+    private final LocationType type;
 
-    private String name;
-    private Type type;
-
-    public Location(String name, Type type) {
+    public Location(String name, LocationType type) {
         this.name = name;
         this.type = type;
     }
-
 
     public String getName() {
         return name;
     }
 
-    public Type getType() {
+    public LocationType getType() {
         return type;
     }
 
