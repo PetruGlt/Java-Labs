@@ -6,6 +6,7 @@ import org.graph4j.*;
 
 import org.graph4j.GraphBuilder;
 import org.graph4j.shortestpath.BidirectionalDijkstra;
+import org.graph4j.util.Path;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -23,8 +24,9 @@ public class Main {
                 .mapToObj(i -> new Location(faker.address().streetAddress(), Math.random()<0.5 ? LocationType.FRIENDLY : Math.random()<0.5 ? LocationType.NEUTRAL : LocationType.ENEMY ) )
                 .toArray(Location[]::new);
 
+        int index =0 ;
         for(Location location : locations) {
-            System.out.println(location);
+            System.out.println(index++ + ". " +  location);
             numLocations++;
         }
         System.out.println("-------Friendly Lcations---------");
@@ -42,26 +44,51 @@ public class Main {
                 .collect(Collectors.toCollection(LinkedList::new));
 
         enemyLocations.forEach(System.out::println);
+        System.out.println("------------------------------------------------------------");
+        System.out.println();
 
         Graph graph = GraphBuilder.empty()
-                .estimatedNumVertices(9)
+                .estimatedNumVertices(8)
                 .buildGraph();
 
         for(int i = 0; i < numLocations; i++) {
             graph.addLabeledVertex(i,locations[i]);
         }
+// v1
+//        graph.addEdge(locations[0],locations[1]);
+//        graph.addEdge(locations[3],locations[1]);
+//        graph.addEdge(locations[4],locations[2]);
+//        graph.addEdge(locations[5],locations[3]);
+//        graph.addEdge(locations[6],locations[4]);
+//        graph.addEdge(locations[7],locations[5]);
 
-        graph.addEdge(locations[0],locations[1]);
-        graph.addEdge(locations[3],locations[1]);
-        graph.addEdge(locations[4],locations[2]);
-        graph.addEdge(locations[5],locations[3]);
-        graph.addEdge(locations[6],locations[4]);
-        graph.addEdge(locations[7],locations[5]);
-//      graph.addEdge(locations[],locations[2]);
+//v2
+        System.out.println("Random generated graph with the followind egdes: ");
+        for(int i = 0; i < numLocations; i++) {
+            Random random = new Random();
+            for(int j = 0; j < random.nextInt(7); j++){
+                Random rand = new Random();
+                int finalNode = rand.nextInt(7);
+                if(finalNode != i){ //&& i < finalNode) {
+                    System.out.println(i + " - " + finalNode);
+                    graph.addEdge(locations[i], locations[finalNode]);
+                }
+            }
+        }
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the start location: ");
+        int startLocationIndex = scanner.nextInt();
+        System.out.println("---------Fastest Routes From START to all locations---------");
 
-        var alg = new BidirectionalDijkstra(graph, graph.findVertex(locations[0]), graph.findVertex(locations[7]));
-        double length = alg.getPathWeight();
-        System.out.println(length);
+
+        Location start = locations[startLocationIndex];
+        for( Location loc : locations) {
+            if(loc != start){
+                var alg = new BidirectionalDijkstra(graph, graph.findVertex(start), graph.findVertex(loc));
+                Path path = alg.findPath();
+                System.out.println(path +" | "+ start+ "->" + loc +" | Length: "+ alg.getPathWeight());
+            }
+        }
 
         LocationByType mapped = new LocationByType();
         mapped.storeLocationsByType(List.of(locations));
