@@ -12,8 +12,14 @@ public class Repository implements Serializable {
         this.name = name;
     }
 
-    public void add(Image image) {
+    public void addImage(Image image) {
         images.add(image);
+    }
+
+    public void removeImage(Image image) {
+        if(images.contains(image)) {
+            images.remove(image);
+        }
     }
 
     public List<Image> getImages() {
@@ -21,7 +27,6 @@ public class Repository implements Serializable {
     }
 
     public void addAll(String folder) {}
-
 
     public Image findImageByName(String name) {
         for(Image image : images) {

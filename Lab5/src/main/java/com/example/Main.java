@@ -10,25 +10,25 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
 
-        Path path = Paths.get(input);
-        if(!Files.exists(path)) {
-            try {
-                Path newDir = Files.createDirectory(Path.of(input));
-            }
-            catch (IOException ex) {
-                System.err.println("Could not create directory");
-            }
-        }
+//        Path path = Paths.get(input);
+//        if(!Files.exists(path)) {
+//            try {
+//                Path newDir = Files.createDirectory(Path.of(input));
+//            }
+//            catch (IOException ex) {
+//                System.err.println("Could not create directory");
+//            }
+//        }
 
         var repository = new Repository(input);
         Image img = new Image("Java-Logo", "/home/petru10/IdeaProjects/Java-Labs/Lab5/resources/lava-logo.png");
-        repository.add(img);
+        repository.addImage(img);
         var service = new RepositoryService();
 
-        service.view(img);
+//        service.view(img);
 
         System.out.println(repository);
-
+        var shell = new Shellv2(repository);
     }
 
 }
