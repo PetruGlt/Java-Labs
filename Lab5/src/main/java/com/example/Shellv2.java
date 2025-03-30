@@ -102,6 +102,14 @@ public class Shellv2 {
             case "list":
                 System.out.println(repository);
                 break;
+            case "report":
+                if (args.length > 1) {
+                    System.err.println("Usage: report [output-path]");
+                } else {
+                    var reportCommand = new ReportCommand();
+                    reportCommand.execute(repository,"/home/petru10/Pictures/in.html");
+                }
+                break;
 
             default:
                 throw new IllegalStateException("Unexpected value: " + command);

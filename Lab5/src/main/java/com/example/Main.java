@@ -1,6 +1,11 @@
 package com.example;
 
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
+
 import java.io.IOException;
+import java.io.StringWriter;
 import java.nio.file.*;
 import java.util.Scanner;
 
