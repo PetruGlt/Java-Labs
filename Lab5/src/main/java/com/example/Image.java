@@ -13,4 +13,12 @@ public record Image(String name, LocalDate dateCreated, List<String> tags, Strin
     public void addTags(List<String> tags) {
         this.tags.addAll(tags);
     }
+
+    public void setTags(List<String> tags) {
+        this.tags.clear();
+        this.tags.addAll(tags);
+    }
+
+
+
 }

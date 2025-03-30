@@ -45,7 +45,7 @@ public class Repository implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder("Repository content:\n");
         for (Image image : images) {
-            sb.append(image.name()).append(" - ").append(image.path()).append("\n");
+            sb.append(image.name()).append(" - ").append(image.path()).append(" - ").append(image.tags()).append("\n");
         }
         return sb.toString();
     }

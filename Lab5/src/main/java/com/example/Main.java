@@ -28,7 +28,16 @@ public class Main {
 //        service.view(img);
 
         System.out.println(repository);
-        var shell = new Shellv2(repository);
+        try {
+            var shell = new Shellv2(repository);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            var shell = new Shellv2(repository);
+        }
+
+
+
     }
 
 }
