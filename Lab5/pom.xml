@@ -39,6 +39,12 @@
             <version>2.3.32</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.graph4j</groupId>
+            <artifactId>graph4j</artifactId>
+            <version>1.0.7</version>
+        </dependency>
+
     </dependencies>
 
     <build>

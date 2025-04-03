@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public record Image(String name, LocalDate dateCreated, List<String> tags, String path){
+public record Image(String name, LocalDate dateCreated, List<String> tags, String path) implements Serializable {
     public Image(String name, String path) {
         this(name, LocalDate.now(), new ArrayList<>(), path);
     }
@@ -18,6 +18,7 @@ public record Image(String name, LocalDate dateCreated, List<String> tags, Strin
         this.tags.clear();
         this.tags.addAll(tags);
     }
+
 
 
 

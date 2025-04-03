@@ -37,11 +37,9 @@ public class Main {
             var shell = new Shellv2(repository);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("Unknown command");
             var shell = new Shellv2(repository);
         }
-
-
 
     }
 

@@ -1,12 +1,14 @@
 package com.example;
 
-import java.security.Provider;
-import java.util.Arrays;
+
+import com.persistance.BinaryPersistance;
+import com.persistance.JSONPersistance;
+import com.persistance.TextPersistance;
+
 import java.util.Scanner;
 
 import java.awt.*;
 import java.io.*;
-import java.nio.file.InvalidPathException;
 
 public class Shellv2 {
     private Repository repository;
@@ -47,6 +49,12 @@ public class Shellv2 {
                     addCommand.execute(args);
                 }
                 break;
+            case "addAll":
+                try {
+                    repository.addAll(args[0]);
+                } catch (IOException e) {
+                    System.err.println("Error: " + e.getMessage());
+                }
             case "remove":
                 // Usage: remove <name>
                 if(commands.length == 1){
@@ -81,24 +89,99 @@ public class Shellv2 {
                     System.err.println("Could not open file " + file.getAbsolutePath());
                 }
                 break;
-            case "save":
-                if (args.length > 1) {
-                    System.err.println("Usage: save <path>");
-                }
-                else {
-                    SaveCommand save = new SaveCommand(repository);
-                    save.execute(args);
+//            case "save":
+//                if (args.length > 1) {
+//                    System.err.println("Usage: text <path>");
+//                }
+//                else {
+//                    SaveCommand save = new SaveCommand(repository);
+//                    save.execute(args);
+//                }
+//                break;
+
+            case "bin-save":
+                if (args.length < 1) { // FIXED: Corrected argument check
+                    System.err.println("Usage: bin-save <path>");
+                } else {
+                    BinaryPersistance bin = new BinaryPersistance();
+                    try {
+                        bin.save(repository, args);
+                    } catch (IOException e) {
+                        System.err.println("Could not save file: " + args[0]); // FIXED: Space added in message
+                    }
                 }
                 break;
-            case "load":
+            case "bin-load":
+                    if (args.length > 1){
+                        System.err.println("Usage: bin-load <path>");
+                    }
+                    else {
+                        BinaryPersistance bin = new BinaryPersistance();
+                        try {
+                            bin.load(args);
+                        } catch (IOException e ) {
+                            System.err.println("Could not load file " + args[0]);
+                        }
+
+                    }
+                    break;
+            case "text-save":
                 if (args.length > 1) {
-                    System.err.println("Usage: load <file-path>");
+                    System.err.println("Usage: text-save <path>");
                 }
                 else {
-                    LoadCommand load = new LoadCommand(repository);
-                    load.execute(args);
+                    TextPersistance text =  new TextPersistance();
+                    try {
+                        text.save(repository, args);
+                    }
+                    catch(IOException e){
+                        System.err.println("Could not save file " + args[0]);
+                    }
                 }
                 break;
+            case "text-load":
+                if(args.length > 1){
+                    System.err.println("Usage: text-load <path>");
+                }
+                else {
+                    TextPersistance text =  new TextPersistance();
+                    try {
+                        text.load(args);
+                    } catch (IOException e) {
+                        System.err.println("Could not load file " + args[0]);
+                    }
+                }
+                break;
+            case "json-load":
+//                switch (args[0]){
+//                    case "load":
+                if (args.length > 1) {
+                    System.err.println("Usage: json-load <file-path>");
+                }
+                JSONPersistance json = new JSONPersistance(repository);
+                try {
+                    json.load(args);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+            case "json-save":
+                if (args.length > 1) {
+                    System.err.println("Usage: json-save <file-path>");
+                }
+
+                JSONPersistance save = new JSONPersistance(repository);
+                save.save(repository, args);
+                break;
+//            case "load":
+//                if (args.length > 1) {
+//                    System.err.println("Usage: load <file-path>");
+//                }
+//                else {
+//                    LoadCommand load = new LoadCommand(repository);
+//                    load.execute(args);
+//                }
+//                break;
             case "list":
                 System.out.println(repository);
                 break;
@@ -110,10 +193,14 @@ public class Shellv2 {
                     reportCommand.execute(repository,"/home/petru10/Pictures/in.html");
                 }
                 break;
-
+            case "max":
+                repository.findMaximalGroups();
+                repository.printMaximalGroups();
+                break;
             default:
                 throw new IllegalStateException("Unexpected value: " + command);
-        }
+
+       }
     }
 
 
