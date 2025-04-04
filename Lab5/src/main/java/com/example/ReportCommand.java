@@ -10,7 +10,7 @@ import java.util.List;
 public class ReportCommand {
     public void execute(Repository repo, String outputPath) {
         try {
-            // Verify template exists first
+
             InputStream test = getClass().getResourceAsStream("/vtemplates/report.ftl");
             if (test == null) throw new FileNotFoundException("Template not found");
             test.close();
@@ -20,14 +20,14 @@ public class ReportCommand {
             cfg.setDefaultEncoding("UTF-8");
 
             Map<String, Object> data = new HashMap<>();
-            data.put("repoName", repo.getRepoName()); // Use actual repo name
+            data.put("repoName", repo.getRepoName());
 
             List<Map<String, Object>> imagesData = new ArrayList<>();
             for (Image image : repo.getImages()) {
                 File file = new File(image.path());
                 imagesData.add(Map.of(
                         "name", image.name(),
-                        "tags", image.tags(), // List<String>
+                        "tags", image.tags(),
                         "size", formatSize(file),
                         "lastModified", file.exists() ?
                                 new Date(file.lastModified()).toString() : "N/A"
