@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 public class Player implements Runnable {
     private String name;
     private Game game;
-    private boolean running;
+    private boolean running =true;
 
     public Player(String name) {
         this.name = name;
@@ -18,6 +18,10 @@ public class Player implements Runnable {
 
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    public Game getGame() {
+        return game;
     }
 
     private boolean submitWord() {

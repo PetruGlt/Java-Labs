@@ -13,6 +13,7 @@ public class Board {
         try{
             words.add(word);
             System.out.println(player.getName() + " : "+word);
+//            System.out.println(player.getGame().getBag());
         }
         finally {
             lock.unlock();
